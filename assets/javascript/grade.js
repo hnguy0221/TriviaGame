@@ -6,7 +6,8 @@
 // Description : This file contains javascript and jquery code to calculate 
 //               the correct and incorrect answers and the questions that are
 //               not answered. Note that the gradeTest() function is called 
-//               when the user clicks on the submit button.
+//               when the user clicks on the submit button and when time has
+//               elapsed.
 // Pseudocode  :
 //
 //============================================================================
@@ -16,10 +17,8 @@ var unanswers = 0;
 var wrongFl = false;
 var unanswerFl = false;
 var correctFl = false;
-var answers = ["Monsters Inc", "Sporty Spice", "Chicago Bulls", 
-    "Blackstreet Boys", "The Lion King", "Cab", "Mark", "Mr Zhou"];
-var MAX_NO_QUESTIONS = 8; //maximum number of questions
-var intervalId;
+var answers = ["Monsters Inc.", "Sporty Spice", "Chicago Bulls", 
+    "Blackstreet Boys", "The Lion King", "Cab", "Mark", "Mr. Zhou"];
 
 function calcChoices(choices, answer)
 {
@@ -69,7 +68,7 @@ function calcChoices(choices, answer)
 
 function displayResults()
 {
-    $("#show-number").remove(); //remove the game counter
+    $("#show-number").remove(); //remove the game counter div
     var tmpStr = "<p class='show-text'>All Done!</p>";
     $("#show-test").html(tmpStr);
     tmpStr = "<p class='show-text'>Correct Answers: " + corrects + "</p>";
@@ -80,11 +79,11 @@ function displayResults()
     $("#show-test").append(tmpStr);
 }
 
-function gradeTest()
+function gradeTest(size)
 {
     //calculate the correct and incorrect answers and questions
     //that are not answered.
-    for (var i = 0; i < MAX_NO_QUESTIONS; i++)
+    for (var i = 0; i < size; i++)
     {
         //get the multiple choices for each question
         var question = "q" + (i+1);
