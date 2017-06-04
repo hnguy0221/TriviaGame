@@ -6,7 +6,7 @@
 // Description : This file contains javascript and jquery code to calculate 
 //               the correct and incorrect answers and the questions that are
 //               not answered. Note that the gradeTest() function is called 
-//               when the user clicks on the submit button and when time has
+//               when the user clicks on the submit button or when time has
 //               elapsed.
 // Pseudocode  :
 //
@@ -24,7 +24,6 @@ function calcChoices(choices, answer)
 {
     for (var i = 0; i < choices.length; i++)
     {
-        //console.log(choices[i]);
         var currentChoice = choices[i];
         if (currentChoice.checked)
         {
@@ -79,11 +78,11 @@ function displayResults()
     $("#show-test").append(tmpStr);
 }
 
-function gradeTest(size)
+function gradeTest()
 {
     //calculate the correct and incorrect answers and questions
     //that are not answered.
-    for (var i = 0; i < size; i++)
+    for (var i = 0; i < testQuestions.length; i++)
     {
         //get the multiple choices for each question
         var question = "q" + (i+1);

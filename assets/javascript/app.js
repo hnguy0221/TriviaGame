@@ -47,77 +47,77 @@ var testQuestions =
     }
 ];
 
+function displayTest()
+{       
+    var len = testQuestions.length;
+    var testStr = "<form action=''><fieldset>";
+    for (var i = 0; i < len; i++)
+    {
+        var questionObj = testQuestions[i];
+        testStr += questionObj["question"];
+        for (var j = 0; j < questionObj["choices"].length; j++)
+        {
+            var eachChoice = questionObj["choices"][j];
+            testStr += "<input type='radio' name='q" + (i+1) + "' id='q" + (i+1) + "' value='" + eachChoice + "' /><label>" + eachChoice + "</label>";
+        }
+        testStr += "<br><br><br>";
+    }
+    testStr += "<button type='button' id='submit-button' onclick='gradeTest()'>Submit</button>" +
+               "</fieldset></form>";
+    //Show testStr in the #show-test tag.
+    $("#show-test").html(testStr);
+}
+
+function decrement()
+{
+    //Show the number in the #show-number tag.
+    $("#show-number").html("<p class='show-text'><strong>Time Remaining: </strong>" + number + "</p><br><br>");
+
+    number--;
+
+    //the clockRunning flag allows the displayTest() function to run once.
+    if (!clockRunning)
+    {
+        displayTest(testQuestions.length);
+        clockRunning = true;
+    }
+
+    //  Once number hits zero...
+    if (number === 0) 
+    {
+        //  ...run the stop function.
+        stop();
+        
+        //grade test
+        gradeTest(testQuestions.length);
+    }
+}
+
+//The stop function
+function stop() 
+{
+    //  Clears our intervalId
+    //  We just pass the name of the interval
+    //  to the clearInterval function.
+    clearInterval(intervalId);
+}
+
+//The run function sets an interval
+//that runs the decrement function once a second.
+function run() 
+{
+    intervalId = setInterval(decrement, 1000);
+}
+
 $(document).ready(function()
 {
-    function displayTest()
-    {       
-        var len = testQuestions.length;
-        var testStr = "<form action=''><fieldset>";
-        for (var i = 0; i < len; i++)
-        {
-            var questionObj = testQuestions[i];
-            testStr += questionObj["question"];
-            for (var j = 0; j < questionObj["choices"].length; j++)
-            {
-                var eachChoice = questionObj["choices"][j];
-                testStr += "<input type='radio' name='q" + (i+1) + "' id='q" + (i+1) + "' value='" + eachChoice + "' /><label>" + eachChoice + "</label>";
-            }
-            testStr += "<br><br><br>";
-        }
-        testStr += "<button type='button' id='submit-button' onclick='gradeTest(" + len + ")'>Submit</button>" +
-                   "</fieldset></form>";
-        //Show testStr in the #show-test tag.
-        $("#show-test").html(testStr);
-    }
-
-    function decrement()
-    {
-        //Show the number in the #show-number tag.
-        $("#show-number").html("<p class='show-text'><strong>Time Remaining: </strong>" + number + "</p><br><br>");
-
-        number--;
-
-        //the clockRunning flag allows the displayTest() function to run once.
-        if (!clockRunning)
-        {
-            displayTest(testQuestions.length);
-            clockRunning = true;
-        }
-
-        //  Once number hits zero...
-        if (number === 0) 
-        {
-            //  ...run the stop function.
-            stop();
-            
-            //grade test
-            gradeTest(testQuestions.length);
-        }
-    }
-    
-    //The stop function
-    function stop() 
-    {
-        //  Clears our intervalId
-        //  We just pass the name of the interval
-        //  to the clearInterval function.
-        clearInterval(intervalId);
-    }
-
-    //The run function sets an interval
-    //that runs the decrement function once a second.
-    function run() 
-    {
-        intervalId = setInterval(decrement, 1000);
-    }
-
-	  //Check if Start button is clicked...
+	//Check if Start button is clicked...
     $("#start-button").on("click", function() 
     {
         //remove Start button
         $("#show-button").remove();
 
-    	  //Execute the run function.
+    	//Execute the run function.
         run();
     });
 });
