@@ -34,7 +34,7 @@ var testQuestions =
         choices: ["Aladdin", "Hercules", "Mulan", "The Lion King"]
     },
     {
-        question: "<p class='show-text'>Finish this line from the Fresh Prince of Bel-Air theme song: \"I whistled for a cab and when it came ner the license plate said ...\"</p>",
+        question: "<p class='show-text'>Finish this line from the Fresh Prince of Bel-Air theme song: \"I whistled for a cab and when it came near the license plate said ...\"</p>",
         choices: ["Dice", "Mirror", "Fresh", "Cab"]
     },
     {
